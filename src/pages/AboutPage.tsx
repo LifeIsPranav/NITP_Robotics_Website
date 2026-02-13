@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { Target, Award, Users, Rocket, BookOpen, TrendingUp, Heart, Lightbulb, Zap } from 'lucide-react';
+import { Target, Users, Rocket, Heart } from 'lucide-react';
 import { useRef } from 'react';
 import { getAchievements, getMilestones, resolveIcon } from '@/data';
 
