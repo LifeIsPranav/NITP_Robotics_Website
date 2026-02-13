@@ -176,13 +176,13 @@ export function TeamPage() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
-            <Card className="overflow-hidden group border-2 hover:border-primary/30 premium-shadow relative">
+            <Card className="overflow-hidden group border-2 hover:border-primary/30 premium-shadow relative transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
               {/* Animated gradient background */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
               {/* Floating orbs */}
               <motion.div 
-                className="absolute top-10 right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"
+                className="absolute top-10 right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 animate={{
                   scale: [1, 1.2, 1],
                   x: [0, 20, 0],
@@ -195,7 +195,7 @@ export function TeamPage() {
                 }}
               />
               <motion.div 
-                className="absolute bottom-10 left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"
+                className="absolute bottom-10 left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 animate={{
                   scale: [1, 1.3, 1],
                   x: [0, -20, 0],
@@ -210,43 +210,19 @@ export function TeamPage() {
               
               <CardContent className="p-0 relative z-10">
                 <div className="md:flex">
-                  <motion.div 
-                    className="md:w-2/5 relative overflow-hidden"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <motion.img
-                      src={teamData.pi.image}
-                      alt={teamData.pi.name}
-                      className="w-full h-full object-cover min-h-[400px]"
-                      initial={{ scale: 1.1 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.2, ease: "easeOut" }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-                    
-                    {/* Animated border shine */}
-                    <motion.div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                      initial={false}
-                      animate={{
-                        background: [
-                          'linear-gradient(0deg, transparent 0%, rgba(var(--primary-rgb), 0.2) 50%, transparent 100%)',
-                          'linear-gradient(180deg, transparent 0%, rgba(var(--primary-rgb), 0.2) 50%, transparent 100%)',
-                          'linear-gradient(0deg, transparent 0%, rgba(var(--primary-rgb), 0.2) 50%, transparent 100%)',
-                        ],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                  </motion.div>
+                  <div className="md:w-2/5 relative overflow-hidden">
+                    <div className="absolute inset-0 scale-100 group-hover:scale-110 transition-transform duration-700 ease-out">
+                      <img
+                        src={teamData.pi.image}
+                        alt={teamData.pi.name}
+                        className="w-full h-full object-cover min-h-[400px]"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+                  </div>
                   
                   <motion.div 
-                    className="p-10 md:w-3/5 relative"
+                    className="p-10 md:w-3/5 relative group-hover:-translate-y-1 transition-transform duration-500"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -258,11 +234,11 @@ export function TeamPage() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                      <h3 className="text-3xl font-heading font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">{teamData.pi.name}</h3>
+                      <h3 className="text-3xl font-heading font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text group-hover:from-primary group-hover:to-primary/70 transition-all duration-500">{teamData.pi.name}</h3>
                     </motion.div>
                     
                     <motion.p 
-                      className="text-primary font-semibold text-lg mb-2"
+                      className="text-primary font-semibold text-lg mb-2 group-hover:scale-105 transition-transform duration-300 origin-left"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -355,15 +331,17 @@ export function TeamPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
               >
-                <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 hover:border-primary/30 h-full hover:-translate-y-2">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 hover:border-primary/30 h-full">
+                  <div className="relative h-80 overflow-hidden bg-muted">
+                    <div className="absolute inset-0 scale-100 group-hover:scale-110 transition-transform duration-700 ease-out">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 flex justify-center gap-2">
+                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex justify-center gap-2">
                       {member.social.github && (
                         <motion.a 
                           whileHover={{ scale: 1.15 }}

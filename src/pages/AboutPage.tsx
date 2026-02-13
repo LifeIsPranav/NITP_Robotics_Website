@@ -24,25 +24,29 @@ const values = [
     icon: Target,
     title: 'Innovation',
     description: 'Pushing boundaries with creative solutions and cutting-edge technologies.',
-    gradient: 'from-blue-500 to-cyan-500'
+    color: 'text-blue-500 dark:text-blue-400',
+    bg: 'bg-blue-500/10 dark:bg-blue-500/15',
   },
   {
     icon: Users,
     title: 'Collaboration',
     description: 'Building together through teamwork, knowledge sharing, and mutual support.',
-    gradient: 'from-purple-500 to-pink-500'
+    color: 'text-violet-500 dark:text-violet-400',
+    bg: 'bg-violet-500/10 dark:bg-violet-500/15',
   },
   {
     icon: Rocket,
     title: 'Excellence',
     description: 'Pursuing mastery in robotics, automation, and artificial intelligence.',
-    gradient: 'from-orange-500 to-red-500'
+    color: 'text-amber-500 dark:text-amber-400',
+    bg: 'bg-amber-500/10 dark:bg-amber-500/15',
   },
   {
     icon: Heart,
     title: 'Community',
     description: 'Fostering an inclusive environment where everyone can learn and grow.',
-    gradient: 'from-green-500 to-emerald-500'
+    color: 'text-emerald-500 dark:text-emerald-400',
+    bg: 'bg-emerald-500/10 dark:bg-emerald-500/15',
   },
 ];
 
@@ -219,12 +223,8 @@ export function AboutPage() {
                 >
                   <Card className="h-full border-2 hover:border-primary/30 transition-all duration-500 group hover:shadow-2xl hover:-translate-y-1">
                     <CardContent className="p-8">
-                      <div className="relative w-20 h-20 mb-6">
-                        <div className="absolute inset-0 bg-foreground/5 dark:bg-foreground/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                        <div className="relative w-full h-full bg-gradient-to-br from-foreground/[0.08] to-foreground/[0.12] dark:from-foreground/[0.12] dark:to-foreground/[0.18] rounded-3xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-105 border border-foreground/[0.08]">
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/10 dark:to-transparent rounded-3xl" />
-                          <Icon size={32} className="text-foreground/70 dark:text-foreground/80 relative z-10" strokeWidth={2} />
-                        </div>
+                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${value.bg} mb-6`}>
+                        <Icon className={`w-6 h-6 ${value.color}`} />
                       </div>
                       <h3 className="text-2xl font-heading font-bold mb-3">{value.title}</h3>
                       <p className="text-muted-foreground leading-relaxed">{value.description}</p>
@@ -518,36 +518,32 @@ export function AboutPage() {
               const Icon = achievement.icon;
               const accentColors = [
                 { 
-                  gradient: 'from-[#667eea] to-[#764ba2]', 
-                  bg: 'bg-[#667eea]/10', 
-                  text: 'text-[#667eea]', 
-                  border: 'hover:border-[#667eea]/30', 
-                  shadow: 'hover:shadow-[#667eea]/10',
-                  iconBg: 'bg-gradient-to-br from-[#667eea] to-[#764ba2]'
+                  color: 'text-blue-500 dark:text-blue-400',
+                  bg: 'bg-blue-500/10 dark:bg-blue-500/15',
+                  text: 'text-blue-500',
+                  border: 'hover:border-blue-500/30',
+                  badgeBg: 'bg-blue-500/10',
                 },
                 { 
-                  gradient: 'from-[#f093fb] to-[#f5576c]', 
-                  bg: 'bg-[#f093fb]/10', 
-                  text: 'text-[#f093fb]', 
-                  border: 'hover:border-[#f093fb]/30', 
-                  shadow: 'hover:shadow-[#f093fb]/10',
-                  iconBg: 'bg-gradient-to-br from-[#f093fb] to-[#f5576c]'
+                  color: 'text-violet-500 dark:text-violet-400',
+                  bg: 'bg-violet-500/10 dark:bg-violet-500/15',
+                  text: 'text-violet-500',
+                  border: 'hover:border-violet-500/30',
+                  badgeBg: 'bg-violet-500/10',
                 },
                 { 
-                  gradient: 'from-[#4facfe] to-[#00f2fe]', 
-                  bg: 'bg-[#4facfe]/10', 
-                  text: 'text-[#4facfe]', 
-                  border: 'hover:border-[#4facfe]/30', 
-                  shadow: 'hover:shadow-[#4facfe]/10',
-                  iconBg: 'bg-gradient-to-br from-[#4facfe] to-[#00f2fe]'
+                  color: 'text-amber-500 dark:text-amber-400',
+                  bg: 'bg-amber-500/10 dark:bg-amber-500/15',
+                  text: 'text-amber-500',
+                  border: 'hover:border-amber-500/30',
+                  badgeBg: 'bg-amber-500/10',
                 },
                 { 
-                  gradient: 'from-[#fa709a] to-[#fee140]', 
-                  bg: 'bg-[#fa709a]/10', 
-                  text: 'text-[#fa709a]', 
-                  border: 'hover:border-[#fa709a]/30', 
-                  shadow: 'hover:shadow-[#fa709a]/10',
-                  iconBg: 'bg-gradient-to-br from-[#fa709a] to-[#fee140]'
+                  color: 'text-emerald-500 dark:text-emerald-400',
+                  bg: 'bg-emerald-500/10 dark:bg-emerald-500/15',
+                  text: 'text-emerald-500',
+                  border: 'hover:border-emerald-500/30',
+                  badgeBg: 'bg-emerald-500/10',
                 },
               ];
               const color = accentColors[index % accentColors.length];
@@ -559,24 +555,16 @@ export function AboutPage() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.8, delay: index * 0.12, ease: "easeOut" }}
                 >
-                  <Card className={`h-full border border-border/50 ${color.border} transition-all duration-500 group hover:shadow-xl ${color.shadow} hover:-translate-y-1 bg-card/80 backdrop-blur-sm`}>
+                  <Card className={`h-full border border-border/50 ${color.border} transition-all duration-500 group hover:shadow-xl hover:-translate-y-1 bg-card/80 backdrop-blur-sm`}>
                     <CardContent className="p-7">
                       <div className="flex items-start gap-5">
-                        <div className="relative w-16 h-16 flex-shrink-0">
-                          <div className={`absolute inset-0 ${color.iconBg} rounded-2xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500`} />
-                          <motion.div 
-                            whileHover={{ scale: 1.08, rotate: 0 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                            className={`relative w-full h-full ${color.iconBg} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-500`}
-                          >
-                            <div className="absolute inset-0 bg-white/[0.15] dark:bg-white/[0.08] rounded-2xl" />
-                            <Icon size={26} className="text-white relative z-10" strokeWidth={2.2} />
-                          </motion.div>
+                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${color.bg} flex-shrink-0`}>
+                          <Icon className={`w-6 h-6 ${color.color}`} />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3 mb-2 flex-wrap">
                             <span className={`text-sm font-semibold ${color.text}`}>{achievement.year}</span>
-                            <span className={`text-xs px-2.5 py-1 rounded-full ${color.bg} ${color.text} font-medium`}>
+                            <span className={`text-xs px-2.5 py-1 rounded-full ${color.badgeBg} ${color.text} font-medium`}>
                               {achievement.category}
                             </span>
                           </div>

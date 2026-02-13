@@ -12,7 +12,7 @@ export function HeroSection2() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
   return (
-    <section ref={ref} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden -mt-20 pt-20">
+    <section ref={ref} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden -mt-20 pt-32 sm:pt-36 md:pt-40 lg:pt-44">
       {/* Ambient Light — adapts to theme */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-transparent dark:from-primary/[0.08]" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/[0.04] dark:bg-primary/[0.06] rounded-full blur-[120px]" />
@@ -87,7 +87,7 @@ export function HeroSection2() {
               </svg>
             </span>
             <br className="hidden sm:block" />
-            to think.
+            &nbsp;to think. 
           </motion.h1>
 
           {/* Subheadline */}

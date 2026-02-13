@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -48,6 +48,31 @@ export function GalleryPage() {
   };
 
   const selectedImageData = filteredImages.find(img => img.id === selectedImage);
+
+  // Add keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (selectedImage === null) return;
+      
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        const currentIndex = filteredImages.findIndex(img => img.id === selectedImage);
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : filteredImages.length - 1;
+        setSelectedImage(filteredImages[prevIndex].id);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        const currentIndex = filteredImages.findIndex(img => img.id === selectedImage);
+        const nextIndex = currentIndex < filteredImages.length - 1 ? currentIndex + 1 : 0;
+        setSelectedImage(filteredImages[nextIndex].id);
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, filteredImages]);
 
   return (
     <div className="min-h-screen overflow-hidden">
@@ -182,7 +207,7 @@ export function GalleryPage() {
                 e.stopPropagation();
                 handlePrevImage();
               }}
-              className="absolute left-4 sm:left-8 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+              className="absolute left-4 sm:left-8 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all z-10"
             >
               <ChevronLeft className="w-6 h-6 text-white" />
             </motion.button>
@@ -194,25 +219,37 @@ export function GalleryPage() {
                 e.stopPropagation();
                 handleNextImage();
               }}
-              className="absolute right-4 sm:right-8 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+              className="absolute right-4 sm:right-8 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all z-10"
             >
               <ChevronRight className="w-6 h-6 text-white" />
             </motion.button>
 
             <motion.div
+              key={selectedImage}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.3 }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = Math.abs(offset.x) * velocity.x;
+                if (swipe < -10000) {
+                  handleNextImage();
+                } else if (swipe > 10000) {
+                  handlePrevImage();
+                }
+              }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-6xl w-full max-h-[85vh]"
+              className="relative max-w-6xl w-full max-h-[85vh] cursor-grab active:cursor-grabbing touch-pan-y select-none"
             >
               <img
                 src={selectedImageData.src}
                 alt={selectedImageData.title}
-                className="w-full h-full object-contain rounded-2xl"
+                className="w-full h-full object-contain rounded-2xl pointer-events-none"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-2xl">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-2xl pointer-events-none">
                 <span className="text-xs font-medium text-primary mb-2 block">{selectedImageData.category}</span>
                 <h3 className="text-white font-heading font-bold text-xl">{selectedImageData.title}</h3>
               </div>

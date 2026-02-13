@@ -99,5 +99,12 @@
   .dark .premium-shadow-lg {
     box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 4px 8px rgba(0,0,0,0.2), 0 24px 48px rgba(0,0,0,0.4);
   }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 

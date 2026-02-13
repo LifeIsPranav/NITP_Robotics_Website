@@ -42,30 +42,63 @@ export function ContactPage() {
       icon: MapPin,
       title: 'Visit Us',
       content: ['National Institute of Technology Patna', 'Ashok Rajpath, Patna', 'Bihar 800005, India'],
-      gradient: 'from-blue-500 to-cyan-500'
+      color: 'text-blue-500 dark:text-blue-400',
+      bg: 'bg-blue-500/10 dark:bg-blue-500/15',
     },
     {
       icon: Mail,
       title: 'Email Us',
       content: ['robotics@nitp.ac.in', 'info@nitproboticsclub.in'],
-      gradient: 'from-purple-500 to-pink-500',
+      color: 'text-violet-500 dark:text-violet-400',
+      bg: 'bg-violet-500/10 dark:bg-violet-500/15',
       links: true
     },
     {
       icon: Phone,
       title: 'Call Us',
       content: ['+91 612 237 1715', '+91 612 237 2715'],
-      gradient: 'from-orange-500 to-red-500',
+      color: 'text-amber-500 dark:text-amber-400',
+      bg: 'bg-amber-500/10 dark:bg-amber-500/15',
       links: true
     },
   ];
 
   const socialLinks = [
-    { icon: Facebook, label: 'Facebook', href: '#', color: 'hover:text-blue-500' },
-    { icon: Instagram, label: 'Instagram', href: '#', color: 'hover:text-pink-500' },
-    { icon: Twitter, label: 'Twitter', href: '#', color: 'hover:text-sky-500' },
-    { icon: Linkedin, label: 'LinkedIn', href: '#', color: 'hover:text-blue-600' },
-    { icon: Github, label: 'GitHub', href: '#', color: 'hover:text-gray-600 dark:hover:text-gray-400' },
+    { 
+      icon: Facebook, 
+      label: 'Facebook', 
+      href: '#', 
+      color: 'text-blue-500 dark:text-blue-400',
+      bg: 'bg-blue-500/10 dark:bg-blue-500/15'
+    },
+    { 
+      icon: Instagram, 
+      label: 'Instagram', 
+      href: '#', 
+      color: 'text-pink-500 dark:text-pink-400',
+      bg: 'bg-pink-500/10 dark:bg-pink-500/15'
+    },
+    { 
+      icon: Twitter, 
+      label: 'Twitter', 
+      href: '#', 
+      color: 'text-sky-500 dark:text-sky-400',
+      bg: 'bg-sky-500/10 dark:bg-sky-500/15'
+    },
+    { 
+      icon: Linkedin, 
+      label: 'LinkedIn', 
+      href: '#', 
+      color: 'text-blue-600 dark:text-blue-500',
+      bg: 'bg-blue-600/10 dark:bg-blue-600/15'
+    },
+    { 
+      icon: Github, 
+      label: 'GitHub', 
+      href: '#', 
+      color: 'text-gray-700 dark:text-gray-400',
+      bg: 'bg-gray-500/10 dark:bg-gray-500/15'
+    },
   ];
 
   return (
@@ -123,14 +156,8 @@ export function ContactPage() {
                 >
                   <Card className="border-2 hover:border-primary/30 transition-all duration-500 h-full premium-shadow group hover:-translate-y-1">
                     <CardContent className="p-8">
-                      <div className="relative w-20 h-20 mb-8">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500`} />
-                        <div className={`relative w-full h-full bg-gradient-to-br ${info.gradient} rounded-3xl flex items-center justify-center shadow-2xl group-hover:shadow-3xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}>
-                          <div className="absolute inset-0 bg-white/10 rounded-3xl backdrop-blur-sm" />
-                          <div className="absolute inset-0 bg-gradient-to-tr from-white/30 to-transparent rounded-3xl" />
-                          <div className="absolute inset-[2px] rounded-[calc(1.5rem-2px)] bg-gradient-to-br from-white/20 to-transparent" />
-                          <Icon size={36} className="text-white relative z-10 drop-shadow-2xl" strokeWidth={2.5} />
-                        </div>
+                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${info.bg} mb-6`}>
+                        <Icon className={`w-6 h-6 ${info.color}`} />
                       </div>
                       <h3 className="text-2xl font-heading font-bold mb-4">{info.title}</h3>
                       <div className="space-y-2">
@@ -275,10 +302,10 @@ export function ContactPage() {
                           key={social.label}
                           href={social.href}
                           whileHover={{ x: 5 }}
-                          className={`flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-accent transition-all duration-300 group ${social.color}`}
+                          className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-accent transition-all duration-300 group"
                         >
-                          <div className="w-12 h-12 rounded-xl bg-background flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <Icon size={24} />
+                          <div className={`w-12 h-12 rounded-xl ${social.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                            <Icon className={`w-5 h-5 ${social.color}`} />
                           </div>
                           <span className="font-medium">{social.label}</span>
                         </motion.a>

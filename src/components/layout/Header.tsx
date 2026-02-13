@@ -62,7 +62,7 @@ export function Header() {
               className="relative w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300"
             >
               <img 
-                src="/src/assets/logo.png" 
+                src="/assets/logo.png" 
                 alt="Robotics Club Logo" 
                 className="w-full h-full object-contain"
               />
@@ -129,7 +129,7 @@ export function Header() {
                       exit={{ rotate: 90, opacity: 0, scale: 0.8 }} 
                       transition={{ duration: 0.3 }}
                     >
-                      <Sun className="w-5 h-5 text-amber-500" />
+                      <Sun className="w-5 h-5 text-white" />
                     </motion.div>
                   ) : (
                     <motion.div 
