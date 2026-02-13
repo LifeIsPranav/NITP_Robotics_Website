@@ -38,8 +38,12 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-                <span className="text-primary-foreground font-heading font-bold text-lg">R</span>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/assets/logo.png" 
+                  alt="Robotics Club Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <div className="font-heading font-bold text-lg tracking-tight">Robotics Club</div>

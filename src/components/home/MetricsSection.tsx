@@ -30,7 +30,7 @@ const metrics = [
   { value: 10, suffix: '+', label: 'Years of Legacy', description: 'Since our founding chapter' },
 ];
 
-export function MetricsSection2() {
+export function MetricsSection() {
   return (
     <section className="section-padding bg-foreground dark:bg-card relative overflow-hidden">
       {/* Subtle grain texture */}

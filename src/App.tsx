@@ -8,6 +8,7 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { EventsPage } from './pages/EventsPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
+import { AwardsPage } from './pages/AwardsPage';
 import { ThemeProvider } from './hooks/use-theme';
 
 function ScrollToTop() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="team" element={<TeamPage />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="events" element={<EventsPage />} />
+            <Route path="awards" element={<AwardsPage />} />
             <Route path="gallery" element={<GalleryPage />} />
             <Route path="contact" element={<ContactPage />} />
           </Route>

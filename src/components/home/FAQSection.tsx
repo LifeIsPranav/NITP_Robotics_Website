@@ -47,7 +47,7 @@ function FAQItem({ item, isOpen, onToggle }: { item: typeof faqs[0]; isOpen: boo
   );
 }
 
-export function FAQSection2() {
+export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (

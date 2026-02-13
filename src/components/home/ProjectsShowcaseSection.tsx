@@ -27,7 +27,7 @@ const projects = [
   },
 ];
 
-export function ProjectsShowcaseSection2() {
+export function ProjectsShowcaseSection() {
   return (
     <section className="section-padding bg-muted/40 dark:bg-muted/10 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

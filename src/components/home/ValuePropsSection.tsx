@@ -32,7 +32,7 @@ const props = [
   },
 ];
 
-export function ValuePropsSection2() {
+export function ValuePropsSection() {
   return (
     <section className="section-padding relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

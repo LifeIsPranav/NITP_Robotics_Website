@@ -5,6 +5,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/hooks/use-theme';
+import { NotificationMenu } from '@/components/NotificationMenu';
 
 const navItems = [
   { name: 'Home', path: '/' },
@@ -12,6 +13,7 @@ const navItems = [
   { name: 'Team', path: '/team' },
   { name: 'Projects', path: '/projects' },
   { name: 'Events', path: '/events' },
+  { name: 'Awards', path: '/awards' },
   { name: 'Gallery', path: '/gallery' },
   { name: 'Contact', path: '/contact' },
 ];
@@ -105,8 +107,11 @@ export function Header() {
             ))}
           </div>
 
-          {/* Right side: Theme toggle + mobile button */}
-          <div className="flex items-center gap-2 relative z-10">
+          {/* Right side: Notifications + Theme toggle + mobile button */}
+          <div className="flex items-center gap-6 relative z-10">
+            {/* Notifications */}
+            <NotificationMenu isScrolled={isScrolled} />
+
             {/* Theme Toggle */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button

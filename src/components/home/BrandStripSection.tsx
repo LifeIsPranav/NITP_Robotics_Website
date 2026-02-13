@@ -4,7 +4,7 @@ const logos = [
   'NIT Patna', 'IIT Bombay', 'Robocon', 'DRDO', 'ISRO', 'TCS', 'IEEE', 'SAE India',
 ];
 
-export function BrandStripSection2() {
+export function BrandStripSection() {
   return (
     <section className="py-16 border-y border-border/50 bg-muted/30 dark:bg-muted/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

@@ -33,7 +33,7 @@ const events = [
   },
 ];
 
-export function EventsSpotlightSection2() {
+export function EventsSpotlightSection() {
   const featured = events.find((e) => e.featured);
   const rest = events.filter((e) => !e.featured);
 

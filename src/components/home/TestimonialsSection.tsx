@@ -22,7 +22,7 @@ const testimonials = [
   },
 ];
 
-export function TestimonialsSection2() {
+export function TestimonialsSection() {
   return (
     <section className="section-padding bg-muted/40 dark:bg-muted/10 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
