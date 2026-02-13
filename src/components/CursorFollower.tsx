@@ -18,12 +18,12 @@ export function CursorFollower() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName === 'A' || 
+      const isInteractive = !!
+        (target.tagName === 'A' || 
         target.tagName === 'BUTTON' || 
         target.closest('a') || 
         target.closest('button') ||
-        target.classList.contains('cursor-pointer');
+        target.classList.contains('cursor-pointer'));
       
       setIsHovering(isInteractive);
     };
