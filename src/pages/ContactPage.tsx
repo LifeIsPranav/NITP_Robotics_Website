@@ -1,0 +1,355 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Mail, MapPin, Phone, Send, Facebook, Twitter, Instagram, Linkedin, Github, MessageCircle } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+
+export function ContactPage() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: 'Message Sent Successfully!',
+      description: 'Thank you for reaching out. We\'ll get back to you within 24 hours.',
+    });
+    
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Visit Us',
+      content: ['National Institute of Technology Patna', 'Ashok Rajpath, Patna', 'Bihar 800005, India'],
+      gradient: 'from-blue-500 to-cyan-500'
+    },
+    {
+      icon: Mail,
+      title: 'Email Us',
+      content: ['robotics@nitp.ac.in', 'info@nitproboticsclub.in'],
+      gradient: 'from-purple-500 to-pink-500',
+      links: true
+    },
+    {
+      icon: Phone,
+      title: 'Call Us',
+      content: ['+91 612 237 1715', '+91 612 237 2715'],
+      gradient: 'from-orange-500 to-red-500',
+      links: true
+    },
+  ];
+
+  const socialLinks = [
+    { icon: Facebook, label: 'Facebook', href: '#', color: 'hover:text-blue-500' },
+    { icon: Instagram, label: 'Instagram', href: '#', color: 'hover:text-pink-500' },
+    { icon: Twitter, label: 'Twitter', href: '#', color: 'hover:text-sky-500' },
+    { icon: Linkedin, label: 'LinkedIn', href: '#', color: 'hover:text-blue-600' },
+    { icon: Github, label: 'GitHub', href: '#', color: 'hover:text-gray-600 dark:hover:text-gray-400' },
+  ];
+
+  return (
+    <div className="min-h-screen overflow-hidden">
+      {/* Hero Section */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10" />
+        <div className="absolute top-20 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 -left-40 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            className="text-center max-w-5xl mx-auto"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+            >
+              <MessageCircle className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">We're Here to Help</span>
+            </motion.div>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold mb-6 leading-tight">
+              Get In{' '}
+              <span className="text-gradient bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
+                Touch
+              </span>
+            </h1>
+            
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+              Have questions or ideas? We'd love to hear from you. Send us a message and we'll respond within 24 hours.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {contactInfo.map((info, index) => {
+              const Icon = info.icon;
+              return (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
+                >
+                  <Card className="border-2 hover:border-primary/30 transition-all duration-500 h-full premium-shadow group hover:-translate-y-1">
+                    <CardContent className="p-8">
+                      <div className="relative w-20 h-20 mb-8">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500`} />
+                        <div className={`relative w-full h-full bg-gradient-to-br ${info.gradient} rounded-3xl flex items-center justify-center shadow-2xl group-hover:shadow-3xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                          <div className="absolute inset-0 bg-white/10 rounded-3xl backdrop-blur-sm" />
+                          <div className="absolute inset-0 bg-gradient-to-tr from-white/30 to-transparent rounded-3xl" />
+                          <div className="absolute inset-[2px] rounded-[calc(1.5rem-2px)] bg-gradient-to-br from-white/20 to-transparent" />
+                          <Icon size={36} className="text-white relative z-10 drop-shadow-2xl" strokeWidth={2.5} />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-heading font-bold mb-4">{info.title}</h3>
+                      <div className="space-y-2">
+                        {info.content.map((line, i) => (
+                          <p key={i} className="text-muted-foreground">
+                            {info.links && (line.includes('@') || line.includes('+')) ? (
+                              <a
+                                href={line.includes('@') ? `mailto:${line}` : `tel:${line.replace(/\s/g, '')}`}
+                                className="hover:text-primary transition-colors"
+                              >
+                                {line}
+                              </a>
+                            ) : (
+                              line
+                            )}
+                          </p>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Form and Social */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-3"
+            >
+              <Card className="border-2 hover:border-primary/30 transition-all duration-500 premium-shadow">
+                <CardContent className="p-8 sm:p-10">
+                  <h3 className="text-3xl font-heading font-bold mb-2">Send us a Message</h3>
+                  <p className="text-muted-foreground mb-8">Fill out the form below and we'll get back to you shortly</p>
+                  
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label htmlFor="name" className="text-sm font-medium">
+                          Your Name <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="h-12 rounded-xl"
+                          placeholder="John Doe"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label htmlFor="email" className="text-sm font-medium">
+                          Email Address <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="h-12 rounded-xl"
+                          placeholder="john@example.com"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label htmlFor="subject" className="text-sm font-medium">
+                        Subject <span className="text-red-500">*</span>
+                      </label>
+                      <Input
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        className="h-12 rounded-xl"
+                        placeholder="How can we help you?"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label htmlFor="message" className="text-sm font-medium">
+                        Message <span className="text-red-500">*</span>
+                      </label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={6}
+                        className="rounded-xl resize-none"
+                        placeholder="Tell us more about your inquiry..."
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 group"
+                    >
+                      {isSubmitting ? (
+                        'Sending...'
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Social Links & Additional Info */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 space-y-6"
+            >
+              {/* Social Media */}
+              <Card className="border-2 hover:border-primary/30 transition-all duration-500 premium-shadow">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-heading font-bold mb-6">Connect With Us</h3>
+                  <div className="space-y-4">
+                    {socialLinks.map((social) => {
+                      const Icon = social.icon;
+                      return (
+                        <motion.a
+                          key={social.label}
+                          href={social.href}
+                          whileHover={{ x: 5 }}
+                          className={`flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-accent transition-all duration-300 group ${social.color}`}
+                        >
+                          <div className="w-12 h-12 rounded-xl bg-background flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Icon size={24} />
+                          </div>
+                          <span className="font-medium">{social.label}</span>
+                        </motion.a>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Quick Info */}
+              <Card className="border-2 hover:border-primary/30 transition-all duration-500 premium-shadow">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-heading font-bold mb-6">Office Hours</h3>
+                  <div className="space-y-4 text-muted-foreground">
+                    <div className="flex justify-between items-center py-2 border-b border-border">
+                      <span className="font-medium">Monday - Friday</span>
+                      <span>9:00 AM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-border">
+                      <span className="font-medium">Saturday</span>
+                      <span>10:00 AM - 4:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="font-medium">Sunday</span>
+                      <span className="text-red-500">Closed</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center mb-12"
+          >
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Find Us</span>
+            <h2 className="text-4xl font-heading font-bold mt-2 mb-4">Visit Our Campus</h2>
+            <p className="text-lg text-muted-foreground">
+              Located at the heart of NIT Patna, we welcome visitors during office hours
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative h-[500px] rounded-3xl overflow-hidden border-2 border-border premium-shadow"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.654788937634!2d85.17036257531996!3d25.620421977442454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58dce6731e59%3A0x4059f39a1ac82e06!2sNational%20Institute%20of%20Technology%2C%20Patna!5e0!3m2!1sen!2sin!4v1707825600000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="grayscale-[30%] hover:grayscale-0 transition-all duration-500"
+            />
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
