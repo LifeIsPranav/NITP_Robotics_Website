@@ -4,107 +4,18 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Github, ExternalLink, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const categories = ['All', 'AI/ML', 'Autonomous', 'IoT', 'Computer Vision', 'Robotics'];
-
-const projects = [
-  {
-    id: 1,
-    title: 'Autonomous Drone Navigation',
-    description: 'AI-powered drone with real-time obstacle detection, path planning, and autonomous navigation using deep learning and computer vision.',
-    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&auto=format&fit=crop',
-    category: 'Autonomous',
-    tags: ['AI', 'Computer Vision', 'ROS', 'Python'],
-    github: '#',
-    demo: '#',
-    status: 'Completed',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Smart Robotic Arm with ML',
-    description: '6-DOF robotic arm featuring precision control, machine learning for object recognition, and adaptive grasping mechanisms.',
-    image: 'https://images.unsplash.com/photo-1563207153-f403bf289096?w=800&auto=format&fit=crop',
-    category: 'Robotics',
-    tags: ['Machine Learning', 'Control Systems', 'Arduino'],
-    github: '#',
-    demo: '#',
-    status: 'Completed',
-    featured: true,
-  },
-  {
-    id: 3,
-    title: 'Swarm Robotics System',
-    description: 'Multi-robot coordination system using swarm intelligence algorithms for collaborative task execution and formation control.',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop',
-    category: 'Autonomous',
-    tags: ['Swarm Intelligence', 'Communication', 'Simulation'],
-    github: '#',
-    status: 'Ongoing',
-  },
-  {
-    id: 4,
-    title: 'Face Recognition Security System',
-    description: 'Real-time face detection and recognition system for access control using deep learning and edge computing.',
-    image: 'https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800&auto=format&fit=crop',
-    category: 'Computer Vision',
-    tags: ['Deep Learning', 'OpenCV', 'TensorFlow'],
-    github: '#',
-    demo: '#',
-    status: 'Completed',
-  },
-  {
-    id: 5,
-    title: 'IoT Home Automation',
-    description: 'Smart home system with voice control, sensor integration, and mobile app for remote monitoring and control.',
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&auto=format&fit=crop',
-    category: 'IoT',
-    tags: ['IoT', 'ESP32', 'Mobile App', 'Voice Control'],
-    github: '#',
-    status: 'Completed',
-  },
-  {
-    id: 6,
-    title: 'Line Following Robot',
-    description: 'Autonomous mobile robot with PID control for line following and ultrasonic sensors for obstacle detection.',
-    image: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=800&auto=format&fit=crop',
-    category: 'Robotics',
-    tags: ['PID Control', 'Sensors', 'Embedded Systems'],
-    github: '#',
-    status: 'Completed',
-  },
-  {
-    id: 7,
-    title: 'Gesture Controlled Robot',
-    description: 'Robot controlled by hand gestures using computer vision and accelerometer data for intuitive human-robot interaction.',
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop',
-    category: 'Computer Vision',
-    tags: ['Gesture Recognition', 'ML', 'Wireless Control'],
-    github: '#',
-    demo: '#',
-    status: 'Ongoing',
-  },
-  {
-    id: 8,
-    title: 'Chatbot with NLP',
-    description: 'Intelligent chatbot for club queries using natural language processing and machine learning.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop',
-    category: 'AI/ML',
-    tags: ['NLP', 'Python', 'Deep Learning', 'API'],
-    github: '#',
-    demo: '#',
-    status: 'Completed',
-  },
-];
+import { getProjects, getProjectCategories, getFeaturedProjects } from '@/data';
 
 export function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
+  const projects = getProjects();
+  const categories = getProjectCategories();
+  const featuredProjects = getFeaturedProjects();
+
   const filteredProjects = selectedCategory === 'All'
     ? projects
     : projects.filter((project) => project.category === selectedCategory);
-
-  const featuredProjects = projects.filter(p => p.featured);
 
   return (
     <div className="min-h-screen overflow-hidden">

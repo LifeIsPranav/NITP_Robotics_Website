@@ -1,28 +1,9 @@
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
-
-const testimonials = [
-  {
-    quote: 'The Robotics Club completely transformed my engineering career. The hands-on projects gave me skills no classroom ever could.',
-    name: 'Arjun Mehta',
-    role: 'Ex-President, Batch of 2023',
-    company: 'Now at Boston Dynamics',
-  },
-  {
-    quote: 'From building my first line-follower to leading a team at Robocon — this club gave me purpose and direction.',
-    name: 'Priya Sharma',
-    role: 'Core Team, Batch of 2024',
-    company: 'Researcher at IIT Delhi',
-  },
-  {
-    quote: 'The mentorship culture here is unmatched. Seniors actually sit down and debug with you at 2 AM before competitions.',
-    name: 'Rahul Kumar',
-    role: 'Technical Lead, Batch of 2024',
-    company: 'SDE at Amazon Robotics',
-  },
-];
+import { getTestimonials } from '@/data';
 
 export function TestimonialsSection() {
+  const testimonials = getTestimonials();
   return (
     <section className="section-padding bg-muted/40 dark:bg-muted/10 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

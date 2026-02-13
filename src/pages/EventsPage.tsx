@@ -3,95 +3,14 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, MapPin, Clock, Users, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
-
-const categories = ['All', 'Workshop', 'Competition', 'Seminar', 'Fest'];
-
-const events = [
-  {
-    id: 1,
-    title: 'Annual Robotics Fest 2026',
-    description: 'Three-day extravaganza featuring competitions, workshops, exhibitions, and tech talks from industry experts.',
-    date: '15-17 March 2026',
-    time: '9:00 AM - 6:00 PM',
-    location: 'NIT Patna Main Campus',
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop',
-    category: 'Fest',
-    capacity: '500+',
-    status: 'Upcoming',
-    registrationOpen: true,
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'AI & Machine Learning Workshop',
-    description: 'Hands-on workshop covering neural networks, computer vision, and implementing AI in robotics applications.',
-    date: '25 February 2026',
-    time: '10:00 AM - 4:00 PM',
-    location: 'Lab Complex, Block A',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop',
-    category: 'Workshop',
-    capacity: '50',
-    status: 'Upcoming',
-    registrationOpen: true,
-    featured: true,
-  },
-  {
-    id: 3,
-    title: 'Line Following Robot Competition',
-    description: 'Test your autonomous navigation skills in this exciting competition with cash prizes and certificates.',
-    date: '10 March 2026',
-    time: '11:00 AM - 5:00 PM',
-    location: 'Main Auditorium',
-    image: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=800&auto=format&fit=crop',
-    category: 'Competition',
-    capacity: '30 Teams',
-    status: 'Upcoming',
-    registrationOpen: true,
-  },
-  {
-    id: 4,
-    title: 'ROS (Robot Operating System) Bootcamp',
-    description: 'Intensive 3-day bootcamp on ROS fundamentals, navigation stack, and autonomous robot development.',
-    date: '20-22 February 2026',
-    time: '9:00 AM - 5:00 PM',
-    location: 'Robotics Lab',
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop',
-    category: 'Workshop',
-    capacity: '40',
-    status: 'Upcoming',
-    registrationOpen: true,
-  },
-  {
-    id: 5,
-    title: 'Tech Talk: Future of Robotics',
-    description: 'Guest lecture by Dr. Ankit Sharma from IIT Delhi on emerging trends in robotics and automation.',
-    date: '5 March 2026',
-    time: '4:00 PM - 6:00 PM',
-    location: 'Auditorium Hall',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop',
-    category: 'Seminar',
-    capacity: '200',
-    status: 'Upcoming',
-    registrationOpen: true,
-  },
-  {
-    id: 6,
-    title: 'Arduino & IoT Workshop',
-    description: 'Learn embedded systems programming, sensor integration, and build your own IoT projects.',
-    date: '18 January 2026',
-    time: '10:00 AM - 4:00 PM',
-    location: 'Lab Complex, Block B',
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&auto=format&fit=crop',
-    category: 'Workshop',
-    capacity: '60',
-    status: 'Completed',
-    registrationOpen: false,
-  },
-];
+import { getEvents, getEventCategories, getFeaturedEvents } from '@/data';
 
 export function EventsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const events = getEvents();
+  const categories = getEventCategories();
+  const featuredEvents = getFeaturedEvents();
 
   const filteredEvents = selectedCategory === 'All'
     ? events
@@ -99,7 +18,6 @@ export function EventsPage() {
 
   const upcomingEvents = filteredEvents.filter(e => e.status === 'Upcoming');
   const pastEvents = filteredEvents.filter(e => e.status === 'Completed');
-  const featuredEvents = events.filter(e => e.featured);
 
   return (
     <div className="min-h-screen overflow-hidden">
@@ -209,13 +127,13 @@ export function EventsPage() {
                           <span className="text-muted-foreground">{event.capacity} participants</span>
                         </div>
                       </div>
-                      {event.registrationOpen && (
-                        <Link to="/contact">
+                      {event.registrationOpen && event.registrationLink && (
+                        <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
                           <Button size="lg" className="w-full rounded-xl group/btn">
                             Register Now
                             <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                           </Button>
-                        </Link>
+                        </a>
                       )}
                     </CardContent>
                   </Card>
@@ -310,13 +228,13 @@ export function EventsPage() {
                             <span className="text-muted-foreground">{event.location}</span>
                           </div>
                         </div>
-                        {event.registrationOpen && (
-                          <Link to="/contact">
+                        {event.registrationOpen && event.registrationLink && (
+                          <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
                             <Button size="sm" className="w-full rounded-lg group/btn">
                               Register
                               <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover/btn:translate-x-0.5 transition-transform" />
                             </Button>
-                          </Link>
+                          </a>
                         )}
                       </CardContent>
                     </Card>

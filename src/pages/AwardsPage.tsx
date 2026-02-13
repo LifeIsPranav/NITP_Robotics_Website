@@ -2,110 +2,16 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Award, Trophy, Medal, Star, Lightbulb, Rocket, BookOpen, Cpu, Globe, Zap } from 'lucide-react';
-
-const categories = ['All', 'Competition', 'Innovation', 'Research', 'Technical'];
-
-const awards = [
-  {
-    id: 1,
-    title: 'First Prize — National Robotics Competition',
-    description: 'Our team secured first place among 120+ teams from across India in the autonomous robot navigation challenge at NRC 2025.',
-    year: '2025',
-    category: 'Competition',
-    icon: Trophy,
-    color: 'text-amber-500 dark:text-amber-400',
-    bg: 'bg-amber-500/10 dark:bg-amber-500/15',
-    venue: 'IIT Delhi',
-  },
-  {
-    id: 2,
-    title: 'Best Innovation Award — TechFest IIT Bombay',
-    description: 'Recognized for developing a novel swarm robotics algorithm that enables decentralized multi-robot coordination in disaster scenarios.',
-    year: '2024',
-    category: 'Innovation',
-    icon: Lightbulb,
-    color: 'text-violet-500 dark:text-violet-400',
-    bg: 'bg-violet-500/10 dark:bg-violet-500/15',
-    venue: 'IIT Bombay',
-  },
-  {
-    id: 3,
-    title: 'Winner — Autonomous Navigation Challenge',
-    description: 'Our autonomous ground vehicle completed the most complex urban navigation course in record time with zero penalties.',
-    year: '2024',
-    category: 'Technical',
-    icon: Rocket,
-    color: 'text-blue-500 dark:text-blue-400',
-    bg: 'bg-blue-500/10 dark:bg-blue-500/15',
-    venue: 'NIT Trichy',
-  },
-  {
-    id: 4,
-    title: 'Excellence in Research — IEEE Conference',
-    description: 'Paper on "Reinforcement Learning for Bipedal Locomotion" published and awarded Best Student Paper at IEEE ICRA.',
-    year: '2023',
-    category: 'Research',
-    icon: BookOpen,
-    color: 'text-emerald-500 dark:text-emerald-400',
-    bg: 'bg-emerald-500/10 dark:bg-emerald-500/15',
-    venue: 'IEEE ICRA, London',
-  },
-  {
-    id: 5,
-    title: 'Gold Medal — ABU Robocon India',
-    description: 'Designed and built a theme-based robot that outperformed participants from 25+ institutions in the national round.',
-    year: '2023',
-    category: 'Competition',
-    icon: Medal,
-    color: 'text-amber-500 dark:text-amber-400',
-    bg: 'bg-amber-500/10 dark:bg-amber-500/15',
-    venue: 'MIT Pune',
-  },
-  {
-    id: 6,
-    title: 'Smart India Hackathon — Grand Finalist',
-    description: 'Our IoT-based agricultural monitoring system was selected among the top 10 solutions nationwide in the hardware edition.',
-    year: '2023',
-    category: 'Innovation',
-    icon: Cpu,
-    color: 'text-violet-500 dark:text-violet-400',
-    bg: 'bg-violet-500/10 dark:bg-violet-500/15',
-    venue: 'SIH 2023, Bhopal',
-  },
-  {
-    id: 7,
-    title: 'Best Technical Paper — IROS Workshop',
-    description: 'Research on visual SLAM for indoor drones presented at the International Conference on Intelligent Robots and Systems.',
-    year: '2022',
-    category: 'Research',
-    icon: Globe,
-    color: 'text-emerald-500 dark:text-emerald-400',
-    bg: 'bg-emerald-500/10 dark:bg-emerald-500/15',
-    venue: 'IROS, Kyoto',
-  },
-  {
-    id: 8,
-    title: 'Winner — Drone Racing Championship',
-    description: 'Our custom FPV racing drone finished first in the inter-college drone racing championship with the fastest lap time.',
-    year: '2022',
-    category: 'Technical',
-    icon: Zap,
-    color: 'text-blue-500 dark:text-blue-400',
-    bg: 'bg-blue-500/10 dark:bg-blue-500/15',
-    venue: 'IIT Kanpur',
-  },
-];
-
-const stats = [
-  { label: 'Awards Won', value: '25+', icon: Trophy },
-  { label: 'Competitions', value: '40+', icon: Medal },
-  { label: 'Research Papers', value: '15+', icon: BookOpen },
-  { label: 'Hackathon Wins', value: '10+', icon: Star },
-];
+import { Award, Trophy } from 'lucide-react';
+import { getAwards, getAwardStats, getAwardCategories, getAwardYears, getAwardsByYear, resolveIcon } from '@/data';
 
 export function AwardsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const awards = getAwards();
+  const stats = getAwardStats();
+  const categories = getAwardCategories();
+  const awardYears = getAwardYears();
 
   const filteredAwards = selectedCategory === 'All'
     ? awards
@@ -155,7 +61,7 @@ export function AwardsPage() {
               className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
             >
               {stats.map((stat, index) => {
-                const Icon = stat.icon;
+                const Icon = resolveIcon(stat.icon);
                 return (
                   <motion.div
                     key={stat.label}
@@ -204,7 +110,7 @@ export function AwardsPage() {
           {/* Awards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {filteredAwards.map((award, index) => {
-              const Icon = award.icon;
+              const Icon = resolveIcon(award.icon);
               return (
                 <motion.div
                   key={award.id}
@@ -275,8 +181,8 @@ export function AwardsPage() {
             {/* Vertical line */}
             <div className="absolute left-6 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 bg-border" />
 
-            {['2025', '2024', '2023', '2022'].map((year, yearIndex) => {
-              const yearAwards = awards.filter((a) => a.year === year);
+            {awardYears.map((year, yearIndex) => {
+              const yearAwards = getAwardsByYear(year);
               return (
                 <motion.div
                   key={year}
@@ -295,7 +201,7 @@ export function AwardsPage() {
 
                   <div className="space-y-4 mt-2">
                     {yearAwards.map((award) => {
-                      const Icon = award.icon;
+                      const Icon = resolveIcon(award.icon);
                       return (
                         <Card key={award.id} className="border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-lg bg-card/80 backdrop-blur-sm">
                           <CardContent className="p-5">

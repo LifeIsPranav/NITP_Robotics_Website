@@ -2,32 +2,18 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
-const projects = [
-  {
-    title: 'Autonomous Drone Navigation',
-    category: 'AI / Computer Vision',
-    description: 'Real-time obstacle detection and path planning using deep learning on a custom-built quadcopter with onboard compute.',
-    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&auto=format&fit=crop&q=80',
-    tags: ['ROS 2', 'YOLOv8', 'PX4', 'Python'],
-  },
-  {
-    title: 'Smart Robotic Arm',
-    category: 'Robotics / ML',
-    description: '6-DOF robotic arm with inverse kinematics and ML-based grasping for precise object manipulation in unstructured environments.',
-    image: 'https://images.unsplash.com/photo-1563207153-f403bf289096?w=800&auto=format&fit=crop&q=80',
-    tags: ['PyBullet', 'Reinforcement Learning', 'C++', 'Arduino'],
-  },
-  {
-    title: 'Swarm Robotics Platform',
-    category: 'Multi-agent Systems',
-    description: 'Coordinated fleet of 12 micro-robots using distributed consensus algorithms for collaborative mapping and search tasks.',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop&q=80',
-    tags: ['ESP32', 'MQTT', 'Swarm Intelligence', 'PCB Design'],
-  },
-];
+import { getFeaturedProjects } from '@/data';
 
 export function ProjectsShowcaseSection() {
+  const projects = getFeaturedProjects().map((p) => ({
+    title: p.title,
+    category: p.category,
+    description: p.description,
+    image: p.image,
+    tags: p.tags,
+    github: p.github,
+    demo: p.demo,
+  }));
   return (
     <section className="section-padding bg-muted/40 dark:bg-muted/10 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

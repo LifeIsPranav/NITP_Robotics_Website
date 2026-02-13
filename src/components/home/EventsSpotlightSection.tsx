@@ -2,40 +2,26 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
-const events = [
-  {
-    title: 'Annual Robotics Fest 2026',
-    date: '15–17 March 2026',
-    location: 'NIT Patna Campus',
-    category: 'Festival',
-    description: 'Three days of competitions, workshops, exhibitions, and keynotes from industry leaders.',
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80',
-    featured: true,
-  },
-  {
-    title: 'AI & ML Workshop Series',
-    date: '25 Feb 2026',
-    location: 'Lab Complex, Block A',
-    category: 'Workshop',
-    description: 'Hands-on implementation of computer vision and reinforcement learning in robotics.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80',
-    featured: false,
-  },
-  {
-    title: 'Line Follower Championship',
-    date: '10 March 2026',
-    location: 'Main Auditorium',
-    category: 'Competition',
-    description: 'Test your autonomous navigation skills. Open to all departments.',
-    image: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=800&auto=format&fit=crop&q=80',
-    featured: false,
-  },
-];
+import { getLatestUpcomingEvents, getFeaturedEvents } from '@/data';
 
 export function EventsSpotlightSection() {
-  const featured = events.find((e) => e.featured);
-  const rest = events.filter((e) => !e.featured);
+  // Pull latest 3 upcoming events from the data layer
+  const latestEvents = getLatestUpcomingEvents(3);
+  const featuredEventIds = new Set(getFeaturedEvents().map((e) => e.id));
+
+  // Map to the shape the UI expects
+  const events = latestEvents.map((e) => ({
+    title: e.title,
+    date: e.date,
+    location: e.location,
+    category: e.category,
+    description: e.description,
+    image: e.image,
+    featured: featuredEventIds.has(e.id),
+  }));
+
+  const featured = events.find((e) => e.featured) || events[0];
+  const rest = events.filter((e) => e !== featured);
 
   return (
     <section className="section-padding relative overflow-hidden">

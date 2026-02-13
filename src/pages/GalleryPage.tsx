@@ -2,30 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const categories = ['All', 'Competitions', 'Workshops', 'Projects', 'Events', 'Team'];
-
-const galleryImages = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop', category: 'Competitions', title: 'Robotics Competition 2025' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop', category: 'Projects', title: 'Autonomous Robot Development' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop', category: 'Workshops', title: 'ROS Workshop Session' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1563207153-f403bf289096?w=800&auto=format&fit=crop', category: 'Projects', title: 'Robotic Arm Project' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&auto=format&fit=crop', category: 'Team', title: 'Team Meeting 2025' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&auto=format&fit=crop', category: 'Workshops', title: 'Arduino Workshop' },
-  { id: 7, src: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=800&auto=format&fit=crop', category: 'Competitions', title: 'Line Following Contest' },
-  { id: 8, src: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&auto=format&fit=crop', category: 'Projects', title: 'Swarm Robotics Demo' },
-  { id: 9, src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop', category: 'Events', title: 'Annual Tech Fest' },
-  { id: 10, src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop', category: 'Team', title: 'Club Activities' },
-  { id: 11, src: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&auto=format&fit=crop', category: 'Projects', title: 'Drone Development' },
-  { id: 12, src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop', category: 'Workshops', title: 'Python Programming' },
-  { id: 13, src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop', category: 'Events', title: 'Guest Lecture Series' },
-  { id: 14, src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop', category: 'Team', title: 'Team Collaboration' },
-  { id: 15, src: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&auto=format&fit=crop', category: 'Projects', title: 'IoT Project Showcase' },
-];
+import { getGalleryImages, getGalleryCategories } from '@/data';
 
 export function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  const galleryImages = getGalleryImages();
+  const categories = getGalleryCategories();
 
   const filteredImages = selectedCategory === 'All'
     ? galleryImages

@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import { getMetrics } from '@/data';
 
 function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef(null);
@@ -23,14 +24,8 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-const metrics = [
-  { value: 100, suffix: '+', label: 'Active Members', description: 'Across all branches and years' },
-  { value: 50, suffix: '+', label: 'Projects Built', description: 'Hardware, software & research' },
-  { value: 25, suffix: '+', label: 'Awards Won', description: 'National & international level' },
-  { value: 10, suffix: '+', label: 'Years of Legacy', description: 'Since our founding chapter' },
-];
-
 export function MetricsSection() {
+  const metrics = getMetrics();
   return (
     <section className="section-padding bg-foreground dark:bg-card relative overflow-hidden">
       {/* Subtle grain texture */}

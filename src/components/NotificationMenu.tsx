@@ -3,43 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, ExternalLink, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { getNotifications, type Notification } from '@/data';
 
-interface Notification {
-  id: number;
-  title: string;
-  description: string;
-  time: string;
-  link?: string;
-  read: boolean;
-}
-
-// Add / edit your notifications here
-const initialNotifications: Notification[] = [
-  {
-    id: 1,
-    title: 'Robotics Fest 2026',
-    description: 'Annual Robotics Fest registrations are now open! Join us for workshops, competitions, and more.',
-    time: '2 hours ago',
-    link: '/events',
-    read: false,
-  },
-  {
-    id: 2,
-    title: 'New Workshop: ROS2',
-    description: 'A hands-on workshop on ROS2 for autonomous navigation will be held this Saturday.',
-    time: '1 day ago',
-    link: '/events',
-    read: false,
-  },
-  {
-    id: 3,
-    title: 'Open Recruitment',
-    description: 'Spring 2026 recruitment is now open for all NIT Patna students. Apply before March 1st.',
-    time: '3 days ago',
-    link: '/contact',
-    read: false,
-  },
-];
+// Add / edit your notifications in src/data/notifications.json
+const initialNotifications: Notification[] = getNotifications();
 
 interface NotificationMenuProps {
   isScrolled: boolean;
