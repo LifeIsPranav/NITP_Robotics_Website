@@ -89,7 +89,7 @@ export function NotificationMenu({ isScrolled }: NotificationMenuProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.96 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute right-0 top-full mt-2 w-[340px] sm:w-[380px] rounded-2xl border border-border/60 bg-card/95 backdrop-blur-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden z-50"
+            className="fixed sm:absolute right-4 sm:right-0 left-4 sm:left-auto top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-[380px] max-w-[380px] rounded-2xl border border-border/60 bg-card/95 backdrop-blur-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden z-50"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
