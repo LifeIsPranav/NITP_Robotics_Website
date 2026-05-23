@@ -171,6 +171,44 @@
       "domain": "Media"
     }
   ],
+  "webTeam": [
+  {
+    "name": "Aditya Shrivastav",
+    "role": "Full-Stack Developer",
+    "year": "First Year, CSE",
+    "image": "/webteamimg/aditya.jpg"
+  },
+  {
+    "name": "Sweety Gupta",
+    "role": "Full-Stack Developer",
+    "year": "First Year, CSE",
+    "image": "/webteamimg/sweety.jpg"
+  },
+  {
+    "name": "Sahil Kumar Mehta",
+    "role": "Frontend Developer",
+    "year": "First Year, CSE",
+    "image": "/webteamimg/sahil.jpg"
+  },
+  {
+    "name": "Vikash Kumar",
+    "role": "UI/UX Designer",
+    "year": "First Year, CSE",
+    "image": "/webteamimg/vikash.jpg"
+  },
+  {
+    "name": "Wagisha Diksha",
+    "role": "Design",
+    "year": "First Year, CSE",
+    "image": "/webteamimg/wagisha.jpg"
+  },
+  {
+    "name": "Khushi",
+    "role": "Design",
+    "year": "First Year, CSE",
+    "image": "/webteamimg/khushi.jpg"
+  }
+  ],
   "members": [
     { "name": "Aayush Chaudhary", "year": "Second Year, ECE", "domain": "Software" },
     { "name": "Mahesh Kumawat", "year": "Second Year, ECE", "domain": "Hardware" },

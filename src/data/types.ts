@@ -69,6 +69,14 @@ export interface TeamCoreMember {
   domain: string;
 }
 
+export interface TeamWebMember {
+  name: string;
+  role: string;
+  year: string;
+  image: string;
+}
+
+
 export interface TeamMember {
   name: string;
   year: string;
@@ -79,6 +87,7 @@ export interface TeamData {
   pi: TeamMemberPI[];
   executives: TeamExecutive[];
   coreTeam: TeamCoreMember[];
+  webTeam: TeamWebMember[];
   members: TeamMember[];
 }
 

@@ -329,6 +329,57 @@ export function TeamPage() {
         </div>
       </section>
 
+
+<section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Web Members</span>
+            <h2 className="text-4xl font-heading font-bold mt-2 mb-2">Web Team</h2>
+            <p className="text-lg text-muted-foreground">Driving technical excellence and innovation</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {teamData.webTeam.map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.7, delay: index * 0.08, ease: "easeOut" }}
+              >
+                <Card className="overflow-hidden hover:shadow-xl transition-all duration-500 border-2 hover:border-primary/30 group hover:-translate-y-1">
+                  <CardContent className="p-0">
+                    <div className="flex items-center p-6 gap-5">
+                      <div className="relative flex-shrink-0">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-24 h-24 rounded-2xl object-cover border-2 border-primary/20 group-hover:border-primary/50 transition-all duration-300"
+                        />
+                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                          {index + 1}
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-heading font-bold text-lg mb-1 group-hover:text-primary transition-colors truncate">{member.name}</h3>
+                        <p className="text-primary text-sm font-semibold mb-1">{member.role}</p>
+                        <p className="text-xs text-muted-foreground mb-2">{member.year}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Members */}
       <section className="section-padding">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
